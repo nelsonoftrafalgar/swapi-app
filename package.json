@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "webpack-dev-server --mode development --hot",
-    "tslint": "tslint src/**/*.ts{,x} --format codeFrame",
+    "tslint": "tslint src/**/*.ts{,x} --format codeFrame --fix",
     "build": "webpack --mode production",
     "test": "jest --watch"
   },
