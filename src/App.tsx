@@ -5,6 +5,7 @@ import styled, { createGlobalStyle } from 'styled-components'
 import Main from './containers/Main'
 import Nav from './containers/Nav'
 import React from 'react'
+import Store from './containers/Store'
 import { vars } from './styles/vars'
 
 const {medium_width} = vars
@@ -19,7 +20,6 @@ const StyleReset = createGlobalStyle`
 
 const Container = styled.div`
   max-width: 100%;
-  /* height: 100vh; */
 `
 
 const rowRwdParams = [
@@ -36,7 +36,7 @@ const mainRwdParams = [
 
 const App = () => {
   return (
-    <>
+    <Store>
       <StyleReset />
       <Container>
         <Router>
@@ -52,7 +52,7 @@ const App = () => {
           </Switch>
         </Router>
       </Container>
-    </>
+    </Store>
   )
 }
 

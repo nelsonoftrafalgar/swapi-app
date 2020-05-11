@@ -12,3 +12,8 @@ export interface IListItem {
 export interface IListProps {
   paths: string[]
 }
+
+export interface IListState {
+  items: IListItem[]
+  nexts: string[]
+}

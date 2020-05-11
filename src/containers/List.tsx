@@ -1,8 +1,9 @@
-import { IListItem, IListProps } from '../dto/model'
-import React, { useCallback, useEffect, useRef, useState } from 'react'
+import { IListProps, IListState } from '../dto/model'
+import React, { useCallback, useContext, useEffect, useRef, useState } from 'react'
 
 import ListItem from '../components/ListItem'
 import { Row } from '../grid'
+import { StoreContext } from './Store'
 import { getDataItem } from '../helpers/getDataItem'
 import { getNextUrls } from '../helpers/getNextUrls'
 import styled from 'styled-components'
@@ -13,8 +14,8 @@ const Container = styled.div`
 `
 
 const List: React.FC<IListProps> = ({paths}) => {
-  const [items, setItems] = useState<IListItem[]>([])
-  const [nextPages, setNextPages] = useState<string[]>([''])
+  const {dispatch, store: {lists}} = useContext(StoreContext)
+  const [state, setState] = useState<IListState>({items: [], nexts: []})
   const observer = useRef<IntersectionObserver>()
 
   const getListItems = (urls: string[]) => {
@@ -23,30 +24,43 @@ const List: React.FC<IListProps> = ({paths}) => {
         const nexts = data.reduce(getNextUrls, [])
         const dataItems = data.reduce(getDataItem, [])
 
-        setItems([...items, ...dataItems])
-        setNextPages(nexts)
+        setState({items: [...state.items, ...dataItems], nexts})
       })
   }
 
+  const cacheItems = () => {
+    dispatch({type: 'CACHE_LIST', payload: {key: paths, value: state}})
+  }
+
   useEffect(() => {
-    getListItems(paths)
+    if (lists.has(paths)) {
+      const {items, nexts} = lists.get(paths)
+      setState({items, nexts})
+    } else { (
+      getListItems(paths)
+    )
+    }
   }, [])
+
+  useEffect(() => {
+    cacheItems()
+  }, [state.items.length])
 
   const lastItemRef = useCallback((node) => {
     if (observer.current) { observer.current.disconnect() }
 
     observer.current = new IntersectionObserver((entries) => {
-      if (entries[0].isIntersecting && nextPages.length) {
-        getListItems(nextPages)
+      if (entries[0].isIntersecting && state.nexts.length) {
+        getListItems(state.nexts)
       }
     }, {threshold: 0.25})
 
     if (node) { observer.current.observe(node) }
 
-  }, [nextPages[0]])
+  }, [state.nexts[0]])
 
-  const renderItems = items.map((item, i) => {
-    const ref = items.length === i + 1 ? lastItemRef : undefined
+  const renderItems = state.items.map((item, i) => {
+    const ref = state.items.length === i + 1 ? lastItemRef : undefined
     return <ListItem lastItemRef={ref} key={item.name} {...item}/>
   })
 
