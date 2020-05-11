@@ -35,17 +35,17 @@ const Url = styled.a`
 `
 
 const rwdParams = [
-  {width: medium_width, content: `width: calc(4 / 12 * 100%);`},
-  {width: large_width, content: `width: calc(3 / 12 * 100%);`}
+  {width: medium_width, content: 'width: calc(4 / 12 * 100%);'},
+  {width: large_width, content: 'width: calc(3 / 12 * 100%);'}
 ]
 
-const ListItem: React.FC<IListItem> = ({url, name, id}) => {
-  const imageSrc = `https://starwars-visualguide.com/assets/img/characters/${id}.jpg`
+const ListItem: React.FC<IListItem> = ({url, name, id, lastItemRef, type}) => {
+  const imageSrc = `https://starwars-visualguide.com/assets/img/${type}/${id}.jpg`
 
   return (
     <Col size={12} padding={'20px'} rwdParams={rwdParams}>
       <Url href={url}>
-        <Item>
+        <Item ref={lastItemRef}>
           <Image src={imageSrc}/>
           <Name>{name}</Name>
         </Item>
