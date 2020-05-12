@@ -1,7 +1,7 @@
 import { getImageSrc, getLinkHref } from '../services/UrlBuilder'
 
 import { Col } from '../grid'
-import { IListItem } from '../dto/model'
+import { IListItemProps } from '../dto/list'
 import { Link } from 'react-router-dom'
 import React from 'react'
 import Text from './Text'
@@ -40,7 +40,7 @@ const rwdParams = [
   {width: large_width, content: 'width: calc(3 / 12 * 100%);'}
 ]
 
-const ListItem: React.FC<IListItem> = ({name, id, lastItemRef, type}) => {
+const ListItem: React.FC<IListItemProps> = ({name, id, lastItemRef, type}) => {
   const imageSrc = getImageSrc(type, id)
   const href = getLinkHref(type, id)
 

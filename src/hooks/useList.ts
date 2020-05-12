@@ -1,16 +1,16 @@
+import { IListData, IListState } from '../dto/list'
 import { useCallback, useEffect, useRef, useState } from 'react'
 
 import { IAction } from '../dto/store'
-import { IListState } from '../dto/model'
 import { getDataItem } from '../helpers/getDataItem'
 import { getNextUrls } from '../helpers/getNextUrls'
 import { pluralFetch } from '../helpers/pluralFetch'
 
-export const useList = (paths: string[], lists: Map<any, any>, dispatch: React.Dispatch<IAction>) => {
+export const useList = (paths: string[], lists: Map<string[], IListState>, dispatch: React.Dispatch<IAction>) => {
   const [state, setState] = useState<IListState>({items: [], nexts: []})
   const observer = useRef<IntersectionObserver>()
 
-  const extractListData = (data: any) => {
+  const extractListData = (data: IListData[]) => {
     const nexts = data.reduce(getNextUrls, [])
     const dataItems = data.reduce(getDataItem, [])
 
@@ -27,7 +27,7 @@ export const useList = (paths: string[], lists: Map<any, any>, dispatch: React.D
 
   useEffect(() => {
     if (lists.has(paths)) {
-      const {items, nexts} = lists.get(paths)
+      const {items, nexts} = lists.get(paths)!
       setState({items, nexts})
     } else {
       getListItems(paths)

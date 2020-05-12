@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 
-import { IListProps } from '../dto/model'
+import { IListProps } from '../dto/list'
 import ListItem from '../components/ListItem'
 import { Row } from '../grid'
 import { StoreContext } from './Store'
