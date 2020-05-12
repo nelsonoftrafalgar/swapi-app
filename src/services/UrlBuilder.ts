@@ -1,0 +1,28 @@
+class UrlBuilder {
+  private MASTER_PATH = 'https://swapi.dev/api'
+
+  CHARACTERS_PATHS = [`${this.MASTER_PATH}/people`]
+  PLANETS_PATHS = [`${this.MASTER_PATH}/planets/`]
+  VEHICLES_PATHS = [`${this.MASTER_PATH}/vehicles/`, `${this.MASTER_PATH}/starships/`]
+
+  getImageSrc = (type: string, id: string) => {
+    return `https://starwars-visualguide.com/assets/img/${type === 'people' ? 'characters' : type}/${id}.jpg`
+  }
+
+  getLinkHref = (type: string, id: string) => {
+    return {pathname: `/details/${type}`, search: `?type=${type}&id=${id}`}
+  }
+
+  getApiUrl = (type: string, id: string) => {
+    return `${this.MASTER_PATH}/${type}/${id}`
+  }
+}
+
+export const {
+  CHARACTERS_PATHS,
+  PLANETS_PATHS,
+  VEHICLES_PATHS,
+  getApiUrl,
+  getImageSrc,
+  getLinkHref
+} = new UrlBuilder()

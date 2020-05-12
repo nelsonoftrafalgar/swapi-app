@@ -1,5 +1,5 @@
 export type LastItemRef = (node: HTMLDivElement) => void
-export type ListType = 'characters' | 'vehicles' | 'planets'
+export type ListType = 'people' | 'vehicles' | 'planets'
 
 export interface IListItem {
   id: string

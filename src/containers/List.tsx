@@ -36,9 +36,8 @@ const List: React.FC<IListProps> = ({paths}) => {
     if (lists.has(paths)) {
       const {items, nexts} = lists.get(paths)
       setState({items, nexts})
-    } else { (
+    } else {
       getListItems(paths)
-    )
     }
   }, [])
 

@@ -1,16 +1,17 @@
+import { CHARACTERS_PATHS, PLANETS_PATHS, VEHICLES_PATHS } from '../services/UrlBuilder'
+
 import List from './List'
+import Person from './Person'
+import Planet from './Planet'
 import React from 'react'
 import { Route } from 'react-router-dom'
+import Vehicle from './Vehicle'
 import styled from 'styled-components'
 
 const Container = styled.div`
   width: 100%;
   background: green;
 `
-
-const CHARACTERS_PATHS = ['https://swapi.dev/api/people']
-const PLANETS_PATHS = ['https://swapi.dev/api/planets/']
-const VEHICLES_PATHS = ['https://swapi.dev/api/vehicles/', 'https://swapi.dev/api/starships/']
 
 const Main = () => {
 
@@ -23,6 +24,9 @@ const Main = () => {
       <Route exact={true} path={'/'} render={renderCharacters}/>
       <Route path={'/planets'} render={renderPlanets}/>
       <Route path={'/vehicles'} render={renderVehicles}/>
+      <Route path={'/details/people'} component={Person}/>
+      <Route path={'/details/planets'} component={Planet}/>
+      <Route path={['/details/vehicles', '/details/starships']} component={Vehicle}/>
     </Container>
   )
 }
