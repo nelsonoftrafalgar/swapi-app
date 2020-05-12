@@ -1,3 +1,4 @@
+import { IAsociatedItemProps } from '../dto/asociated'
 import { Link } from 'react-router-dom'
 import React from 'react'
 import { getLinkHref } from '../services/UrlBuilder'
@@ -8,17 +9,15 @@ const Url = styled(Link)`
   color: black;
 `
 
-interface IAsociatedItemProps {
-  name: string
-  id: string
-  type: string
-}
+const Li = styled.li`
+  margin-top: 5px;
+`
 
 const AsociatedItem: React.FC<IAsociatedItemProps> = ({name, id, type}) => {
   return (
-    <li>
+    <Li>
       <Url to={getLinkHref(type, id)}>{name}</Url>
-    </li>
+    </Li>
   )
 }
 

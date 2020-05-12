@@ -1,19 +1,16 @@
 import { Col, Row } from '../grid'
 import { getApiUrl, getImageSrc, getLinkHref } from '../services/UrlBuilder'
 
+import Asociated from './Asociated'
 import AsociatedItem from '../components/AsociatedItem'
+import { IAsociated } from '../dto/asociated'
 import { Link } from 'react-router-dom'
 import React from 'react'
+import Text from '../components/Text'
 import { extractPersonData } from '../services/DataExtractor'
 import styled from 'styled-components'
 import { useDetails } from '../hooks/useDetails'
 import { useQuery } from '../hooks/useQuery'
-
-interface IAsociated {
-  name: string
-  type: string
-  id: string
-}
 
 interface IPersonDetailsState {
   name: string
@@ -66,7 +63,7 @@ const Person = () => {
   const planet = asociated?.find((item: any) => item.type === 'planets')
   const race = asociated?.find((item: any) => item.type === 'species')
 
-  const vehicles = asociated?.reduce((a: JSX.Element[], params: IAsociated) => {
+  const asociatedList = asociated?.reduce((a: JSX.Element[], params: IAsociated) => {
     const item = <AsociatedItem key={params.name} {...params}/>
     return params.type === 'planets' || params.type === 'species' ? a : [...a, item]
   }, [])
@@ -80,18 +77,15 @@ const Person = () => {
           <Tile>
             <Image src={imageSrc}/>
             <Description>
-              <h1>{name}</h1>
-              <p>race: {race?.name || 'unknown'}</p>
-              <p>planet: <Url to={href}>{planet?.name}</Url></p>
+              <Text type={'h1'}>{name}</Text>
+              <Text>race: {race?.name || 'unknown'}</Text>
+              <Text>planet: <Url to={href}>{planet?.name}</Url></Text>
             </Description>
           </Tile>
         </Col>
         <Col size={12} padding={'20px'}>
           <Tile>
-            <h2>Asociated vehicles</h2>
-            <ul>
-              {vehicles}
-            </ul>
+            <Asociated data={asociatedList} title={'vehicles'}/>
           </Tile>
         </Col>
       </Row>

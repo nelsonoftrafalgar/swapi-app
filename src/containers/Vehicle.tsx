@@ -1,18 +1,15 @@
 import { Col, Row } from '../grid'
 import { getApiUrl, getImageSrc } from '../services/UrlBuilder'
 
+import Asociated from './Asociated'
 import AsociatedItem from '../components/AsociatedItem'
+import { IAsociated } from '../dto/asociated'
 import React from 'react'
+import Text from '../components/Text'
 import { extractVehicleData } from '../services/DataExtractor'
 import styled from 'styled-components'
 import { useDetails } from '../hooks/useDetails'
 import { useQuery } from '../hooks/useQuery'
-
-interface IAsociated {
-  name: string
-  type: string
-  id: string
-}
 
 interface IVehicleDetailsState {
   name: string
@@ -56,7 +53,7 @@ const Vehicle = () => {
 
   const {name, vehicleClass, asociated} = useDetails(url, extractVehicleData)
 
-  const people = asociated?.map((params: IAsociated) => {
+  const asociatedList = asociated?.map((params: IAsociated) => {
     return <AsociatedItem key={params.name} {...params}/>
   })
 
@@ -67,17 +64,14 @@ const Vehicle = () => {
           <Tile>
             <Image src={imageSrc}/>
             <Description>
-              <h1>{name}</h1>
-              <p>class: {vehicleClass}</p>
+              <Text type={'h1'}>{name}</Text>
+              <Text>class: {vehicleClass}</Text>
             </Description>
           </Tile>
         </Col>
         <Col size={12} padding={'20px'}>
           <Tile>
-            <h2>Asociated people</h2>
-            <ul>
-              {people}
-            </ul>
+            <Asociated data={asociatedList} title={'people'}/>
           </Tile>
         </Col>
       </Row>

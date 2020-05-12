@@ -4,6 +4,7 @@ import { Col } from '../grid'
 import { IListItem } from '../dto/model'
 import { Link } from 'react-router-dom'
 import React from 'react'
+import Text from './Text'
 import styled from 'styled-components'
 import { vars } from '../styles/vars'
 
@@ -26,10 +27,7 @@ const Item = styled.div`
 
 const Image = styled.img`
   width: 150px;
-`
-
-const Name = styled.p`
-  margin-top: 10px;
+  margin-bottom: 10px;
 `
 
 const Url = styled(Link)`
@@ -51,7 +49,7 @@ const ListItem: React.FC<IListItem> = ({name, id, lastItemRef, type}) => {
       <Url to={href}>
         <Item ref={lastItemRef}>
           <Image src={imageSrc}/>
-          <Name>{name}</Name>
+          <Text>{name}</Text>
         </Item>
       </Url>
     </Col>
