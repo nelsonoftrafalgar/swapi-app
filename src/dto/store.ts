@@ -1,12 +1,19 @@
+import { IListState } from './list'
+
 export interface IState {
-  lists: Map<any, any>
+  lists: Map<string[], IListState>
 }
 
 export type ActionType = 'CACHE_LIST'
 
+interface IActionPayload {
+  key: string[]
+  value: IListState
+}
+
 export interface IAction {
   type: ActionType
-  payload: any
+  payload: IActionPayload
 }
 
 export interface IStoreContext {

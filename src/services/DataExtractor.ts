@@ -1,27 +1,60 @@
+import { IAsociatesInfo } from '../hooks/useDetails'
 import { pluralFetch } from '../helpers/pluralFetch'
 
+export interface IVehicleData {
+  name: string
+  vehicle_class: string
+  starship_class: string
+  pilots: string[]
+}
+
+export interface IPlanetData {
+  name: string
+  population: string
+  residents: string[]
+}
+
+export interface IPersonData {
+  name: string
+  homeworld: string
+  species: string[]
+  vehicles: string[]
+  starships: string[]
+}
+
+export type ExtractAsociates <B> = (basicInfo: B) => (info: IAsociatesInfo) => void
+
+interface IVehicleAsociates {
+  name: string
+  vehicleClass: string
+}
+
+interface IPlanetAsociated {
+  name: string
+  population: string
+}
+
+interface IPersonAsociates {
+  name: string
+}
+
 class DataExtractor {
-  extractVehicleData = (handleAsociates: any) => (data: any) => {
-    const name = data.name
-    const vehicleClass = data.vehicle_class || data.starship_class
-    const info = data.pilots
+  extractVehicleData = (handleAsociates: ExtractAsociates<IVehicleAsociates>) => (data: IVehicleData) => {
+    const {name, vehicle_class, starship_class, pilots} = data
+    const vehicleClass = vehicle_class || starship_class
 
-    pluralFetch(info, handleAsociates({name, vehicleClass}))
+    pluralFetch(pilots, handleAsociates({name, vehicleClass}))
   }
 
-  extractPlanetData = (handleAsociates: any) => (data: any) => {
-    const name = data.name
-    const population = data.population
-    const info = data.residents
+  extractPlanetData = (handleAsociates: ExtractAsociates<IPlanetAsociated>) => (data: IPlanetData) => {
+    const {name, population, residents} = data
 
-    pluralFetch(info, handleAsociates({name, population}))
+    pluralFetch(residents, handleAsociates({name, population}))
   }
 
-  extractPersonData = (handleAsociates: any) => (data: any) => {
-    const name = data.name
-    const planet = data.homeworld
-    const race = data.species
-    const info = [...data.vehicles, ...data.starships, planet, ...race]
+  extractPersonData = (handleAsociates: ExtractAsociates<IPersonAsociates>) => (data: IPersonData) => {
+    const {name, homeworld, species, starships, vehicles} = data
+    const info = [...vehicles, ...starships, homeworld, ...species]
 
     pluralFetch(info, handleAsociates({name}))
   }
