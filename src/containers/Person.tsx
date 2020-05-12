@@ -1,8 +1,8 @@
-import { Col, Row } from '../grid'
 import { getApiUrl, getImageSrc, getLinkHref } from '../services/UrlBuilder'
 
 import Asociated from './Asociated'
 import AsociatedItem from '../components/AsociatedItem'
+import Details from './Details'
 import { IAsociated } from '../dto/asociated'
 import { Link } from 'react-router-dom'
 import React from 'react'
@@ -23,35 +23,6 @@ const Url = styled(Link)`
   color: black;
 `
 
-const Container = styled.div`
-  width: 100%;
-  height: 100vh;
-  background: orange;
-`
-
-const Tile = styled.div`
-  width: 100%;
-  border-radius: 5px;
-  background: white;
-  padding: 20px;
-  box-shadow: 0 4px 16px 0 rgba(0,0,0,.1);
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-`
-
-const Image = styled.img`
-  width: 250px;
-`
-
-const Description = styled.div`
-  width: 250px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 20px;
-`
-
 const Person = () => {
   const {type, id} = useQuery(['type', 'id'])
 
@@ -70,26 +41,16 @@ const Person = () => {
 
   const href = getLinkHref(planet?.type, planet?.id)
 
+  const list = <Asociated data={asociatedList} title={'vehicles'}/>
+
+  const description = [
+    <Text type={'h1'} size={'20px'}>{name}</Text>,
+    <Text>race: {race?.name || 'unknown'}</Text>,
+    <Text>planet: <Url to={href}>{planet?.name}</Url></Text>
+  ]
+
   return (
-    <Container>
-      <Row direction={'col'}>
-        <Col size={12} padding={'20px'}>
-          <Tile>
-            <Image src={imageSrc}/>
-            <Description>
-              <Text type={'h1'}>{name}</Text>
-              <Text>race: {race?.name || 'unknown'}</Text>
-              <Text>planet: <Url to={href}>{planet?.name}</Url></Text>
-            </Description>
-          </Tile>
-        </Col>
-        <Col size={12} padding={'20px'}>
-          <Tile>
-            <Asociated data={asociatedList} title={'vehicles'}/>
-          </Tile>
-        </Col>
-      </Row>
-    </Container>
+    <Details imageSrc={imageSrc} description={description} list={list}/>
   )
 }
 
