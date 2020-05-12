@@ -1,20 +1,5 @@
+import { IAction, IState, IStoreContext } from '../dto/store'
 import React, { useReducer } from 'react'
-
-interface IState {
-  lists: Map<any, any>
-}
-
-export type ActionType = 'CACHE_LIST'
-
-interface IAction {
-  type: ActionType
-  payload: any
-}
-
-interface IStoreContext {
-  dispatch: React.Dispatch<IAction>
-  store: IState
-}
 
 const initialState = {
   lists: new Map()
