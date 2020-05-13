@@ -11,8 +11,13 @@ const Container = styled.div`
   height: 15vh;
   display: flex;
   justify-content: center;
+  border-bottom: 5px solid #b21515;
 
-  ${breakpoint({width: medium_width, content: 'height: 100vh'})}
+  ${breakpoint({width: medium_width, content: `
+    height: 100vh;
+    border-right: 5px solid #b21515;
+    border-bottom: none;
+  `})}
 `
 
 const List = styled.ul`
@@ -39,6 +44,7 @@ export const StyledLink = styled(Link)`
   width: 100%;
   text-decoration: none;
   color: black;
+  font-family: sans-serif;
 `
 
 const Nav = () => {

@@ -12,7 +12,7 @@ const Text: React.FC<ITextProps> = ({
   children,
   type = 'p',
   size = '16px',
-  font = 'sans-sefif',
+  font = 'sans-serif',
   color = 'black'
 }) => {
 

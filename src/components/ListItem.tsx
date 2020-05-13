@@ -13,10 +13,10 @@ const {medium_width, large_width} = vars
 const Item = styled.div`
   width: 100%;
   min-height: 200px;
-  border-radius: 5px;
-  background: white;
   padding: 20px;
-  box-shadow: 0 4px 16px 0 rgba(0,0,0,.1);
+  border-radius: 15px;
+  background: #ffffff;
+  box-shadow:  20px 20px 60px #d1d1d1, -20px -20px 60px #ffffff;
   display: flex;
   align-items: center;
   flex-direction: column;

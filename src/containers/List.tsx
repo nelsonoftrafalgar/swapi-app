@@ -11,9 +11,10 @@ import { useLoader } from '../hooks/useLoader'
 
 const Container = styled.div`
   width: 100%;
-  min-height: 100vh;
-  background: pink;
+  height: 100vh;
   position: relative;
+  overflow-y: scroll;
+  scrollbar-width: none;
 `
 
 const Loader = styled.div`
@@ -38,7 +39,7 @@ const List: React.FC<IListProps> = ({paths}) => {
 
   return (
     <Container>
-      {isLoading && <Loader><Text size={'20px'}>Loading...</Text></Loader>}
+      {isLoading && <Loader><Text size={'20px'}>Patient you must be...</Text></Loader>}
       <Row direction={'row'}>
         {renderItems}
       </Row>

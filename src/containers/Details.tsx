@@ -3,27 +3,28 @@ import { Col, Row } from '../grid'
 import React from 'react'
 import Text from '../components/Text'
 import styled from 'styled-components'
+import { vars } from '../styles/vars'
+
+const {medium_width} = vars
 
 const Container = styled.div`
   width: 100%;
   height: 100vh;
-  background: orange;
   position: relative;
 `
 
 const Tile = styled.div`
   width: 100%;
-  border-radius: 5px;
-  background: white;
   padding: 20px;
-  box-shadow: 0 4px 16px 0 rgba(0,0,0,.1);
+  border-radius: 15px;
+  background: #ffffff;
+  box-shadow:  20px 20px 60px #d1d1d1, -20px -20px 60px #ffffff;
   display: flex;
   align-items: center;
   flex-direction: column;
 `
 
 const Description = styled.div`
-  width: 250px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -51,12 +52,16 @@ interface IDetailsProps {
   isLoading: boolean
 }
 
+const rwdParams = [
+  {width: medium_width, content: 'width: calc(6 / 12 * 100%);'},
+]
+
 const Details: React.FC<IDetailsProps> = ({isLoading, imageSrc, description, list}) => {
   return (
     <Container>
-      {isLoading && <Loader><Text size={'20px'}>Loading...</Text></Loader>}
-      <Row direction={'col'}>
-        <Col size={12} padding={'20px'}>
+      {isLoading && <Loader><Text size={'20px'}>Patient you must be...</Text></Loader>}
+      <Row>
+        <Col size={12} padding={'20px'} rwdParams={rwdParams}>
           <Tile>
             <Image src={imageSrc}/>
             <Description>
@@ -64,7 +69,7 @@ const Details: React.FC<IDetailsProps> = ({isLoading, imageSrc, description, lis
             </Description>
           </Tile>
         </Col>
-        <Col size={12} padding={'20px'}>
+        <Col size={12} padding={'20px'} rwdParams={rwdParams}>
           <Tile>
             {list}
           </Tile>
