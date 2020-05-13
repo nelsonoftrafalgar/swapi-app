@@ -1,8 +1,8 @@
+import { BasicInfo, ExtractAsociates, ExtractData, IData } from '../dto/details'
 import { useEffect, useState } from 'react'
 
 import { getIdFromUrl } from '../helpers/getIdFromUrl'
 import { getTypeFromUrl } from '../helpers/getTypeFromUrl'
-import { ExtractData, BasicInfo, IData, ExtractAsociates } from '../dto/details'
 
 export const useDetails = <S>(apiUrl: string, handleData: ExtractData<BasicInfo, IData>) => {
   const [state, setState] = useState({} as S)
@@ -15,7 +15,7 @@ export const useDetails = <S>(apiUrl: string, handleData: ExtractData<BasicInfo,
       return {name, type, id}
     })
 
-    setState({basicInfo, asociated} as any)
+    setState({...basicInfo, asociated} as any)
   }
 
   useEffect(() => {

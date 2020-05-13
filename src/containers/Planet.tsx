@@ -4,12 +4,12 @@ import Asociated from './Asociated'
 import AsociatedItem from '../components/AsociatedItem'
 import Details from './Details'
 import { IAsociated } from '../dto/asociated'
+import { IPlanetDetailsState } from '../dto/details'
 import React from 'react'
 import Text from '../components/Text'
 import { extractPlanetData } from '../services/DataExtractor'
 import { useDetails } from '../hooks/useDetails'
 import { useQuery } from '../hooks/useQuery'
-import { IPlanetDetailsState } from '../dto/details'
 
 const Planet = () => {
   const {type, id} = useQuery(['type', 'id'])
@@ -25,12 +25,17 @@ const Planet = () => {
   const list = <Asociated data={asociatedList} title={'people'}/>
 
   const description = [
-    <Text type={'h1'} size={'20px'}>{name}</Text>,
-    <Text>population: {population}</Text>
+    <Text key={'1'} type={'h1'} size={'20px'}>{name}</Text>,
+    <Text key={'2'}>population: {population}</Text>
   ]
 
   return (
-    <Details imageSrc={imageSrc} description={description} list={list}/>
+    <Details
+      isLoading={!Boolean(name)}
+      imageSrc={imageSrc}
+      description={description}
+      list={list}
+    />
   )
 }
 

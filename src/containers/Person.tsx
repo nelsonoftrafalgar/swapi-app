@@ -4,6 +4,7 @@ import Asociated from './Asociated'
 import AsociatedItem from '../components/AsociatedItem'
 import Details from './Details'
 import { IAsociated } from '../dto/asociated'
+import { IPersonDetailsState } from '../dto/details'
 import { Link } from 'react-router-dom'
 import React from 'react'
 import Text from '../components/Text'
@@ -11,7 +12,6 @@ import { extractPersonData } from '../services/DataExtractor'
 import styled from 'styled-components'
 import { useDetails } from '../hooks/useDetails'
 import { useQuery } from '../hooks/useQuery'
-import { IPersonDetailsState } from '../dto/details'
 
 const Url = styled(Link)`
   text-decoration: none;
@@ -39,13 +39,18 @@ const Person = () => {
   const list = <Asociated data={asociatedList} title={'vehicles'}/>
 
   const description = [
-    <Text type={'h1'} size={'20px'}>{name}</Text>,
-    <Text>race: {race?.name || 'unknown'}</Text>,
-    <Text>planet: <Url to={href}>{planet?.name}</Url></Text>
+    <Text key={'1'} type={'h1'} size={'20px'}>{name}</Text>,
+    <Text key={'2'}>race: {race?.name || 'unknown'}</Text>,
+    <Text key={'3'}>planet: <Url to={href}>{planet?.name}</Url></Text>
   ]
 
   return (
-    <Details imageSrc={imageSrc} description={description} list={list}/>
+    <Details
+      isLoading={!Boolean(name)}
+      imageSrc={imageSrc}
+      description={description}
+      list={list}
+    />
   )
 }
 

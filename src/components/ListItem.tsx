@@ -12,6 +12,7 @@ const {medium_width, large_width} = vars
 
 const Item = styled.div`
   width: 100%;
+  min-height: 200px;
   border-radius: 5px;
   background: white;
   padding: 20px;
@@ -56,4 +57,4 @@ const ListItem: React.FC<IListItemProps> = ({name, id, lastItemRef, type}) => {
   )
 }
 
-export default ListItem
+export default React.memo(ListItem)
