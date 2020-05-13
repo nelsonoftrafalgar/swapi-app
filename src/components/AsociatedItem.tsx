@@ -1,13 +1,8 @@
 import { IAsociatedItemProps } from '../dto/asociated'
-import { Link } from 'react-router-dom'
 import React from 'react'
+import { Url } from '../styles/shared'
 import { getLinkHref } from '../services/UrlBuilder'
 import styled from 'styled-components'
-
-const Url = styled(Link)`
-  text-decoration: none;
-  color: black;
-`
 
 const Li = styled.li`
   margin-top: 5px;

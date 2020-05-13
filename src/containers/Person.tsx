@@ -5,18 +5,12 @@ import AsociatedItem from '../components/AsociatedItem'
 import Details from './Details'
 import { IAsociated } from '../dto/asociated'
 import { IPersonDetailsState } from '../dto/details'
-import { Link } from 'react-router-dom'
 import React from 'react'
 import Text from '../components/Text'
+import { Url } from '../styles/shared'
 import { extractPersonData } from '../services/DataExtractor'
-import styled from 'styled-components'
 import { useDetails } from '../hooks/useDetails'
 import { useQuery } from '../hooks/useQuery'
-
-const Url = styled(Link)`
-  text-decoration: none;
-  color: black;
-`
 
 const Person = () => {
   const {type, id} = useQuery(['type', 'id'])

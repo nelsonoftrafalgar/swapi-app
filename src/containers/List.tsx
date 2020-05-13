@@ -2,6 +2,7 @@ import React, { useContext } from 'react'
 
 import { IListProps } from '../dto/list'
 import ListItem from '../components/ListItem'
+import { Loader } from '../styles/shared'
 import { Row } from '../grid'
 import { StoreContext } from './Store'
 import Text from '../components/Text'
@@ -15,16 +16,6 @@ const Container = styled.div`
   position: relative;
   overflow-y: scroll;
   scrollbar-width: none;
-`
-
-const Loader = styled.div`
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  background: white;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 `
 
 const List: React.FC<IListProps> = ({paths}) => {

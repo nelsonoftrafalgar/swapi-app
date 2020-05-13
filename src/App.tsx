@@ -6,6 +6,7 @@ import Main from './containers/Main'
 import Nav from './containers/Nav'
 import React from 'react'
 import Store from './containers/Store'
+import { getRwdParams } from './helpers/getRwdParams'
 import { vars } from './styles/vars'
 
 const {medium_width} = vars
@@ -22,17 +23,9 @@ const Container = styled.div`
   max-width: 100%;
 `
 
-const rowRwdParams = [
-  {width: medium_width, content: 'flex-direction: row;'}
-]
-
-const navRwdParams = [
-  {width: medium_width, content: `width: calc(2 / 12 * 100%);`}
-]
-
-const mainRwdParams = [
-  {width: medium_width, content: `width: calc(10 / 12 * 100%);`}
-]
+const rowRwdParams = getRwdParams([[medium_width, 'flex-direction: row;']])
+const navRwdParams = getRwdParams([[medium_width, `width: calc(2 / 12 * 100%);`]])
+const mainRwdParams = getRwdParams([[medium_width, `width: calc(10 / 12 * 100%);`]])
 
 const App = () => {
   return (
