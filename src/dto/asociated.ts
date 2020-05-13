@@ -1,6 +1,6 @@
 export interface IAsociatedProps {
   title: string
-  data: any
+  data: JSX.Element[]
 }
 
 export interface IAsociated {
@@ -10,3 +10,8 @@ export interface IAsociated {
 }
 
 export interface IAsociatedItemProps extends IAsociated {}
+
+export interface IAsociatesInfo {
+  name: string
+  url: string
+}

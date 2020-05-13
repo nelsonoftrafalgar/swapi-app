@@ -11,12 +11,7 @@ import { extractPersonData } from '../services/DataExtractor'
 import styled from 'styled-components'
 import { useDetails } from '../hooks/useDetails'
 import { useQuery } from '../hooks/useQuery'
-
-interface IPersonDetailsState {
-  name: string
-  race: string
-  asociated: IAsociated[]
-}
+import { IPersonDetailsState } from '../dto/details'
 
 const Url = styled(Link)`
   text-decoration: none;
@@ -29,10 +24,10 @@ const Person = () => {
   const url = getApiUrl(type, id)
   const imageSrc = getImageSrc(type, id)
 
-  const {name, asociated} = useDetails(url, extractPersonData)
+  const {name, asociated} = useDetails<IPersonDetailsState>(url, extractPersonData)
 
-  const planet = asociated?.find((item: any) => item.type === 'planets')
-  const race = asociated?.find((item: any) => item.type === 'species')
+  const planet = asociated?.find((item: IAsociated) => item.type === 'planets')!
+  const race = asociated?.find((item: IAsociated) => item.type === 'species')
 
   const asociatedList = asociated?.reduce((a: JSX.Element[], params: IAsociated) => {
     const item = <AsociatedItem key={params.name} {...params}/>

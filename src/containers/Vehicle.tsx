@@ -9,19 +9,14 @@ import Text from '../components/Text'
 import { extractVehicleData } from '../services/DataExtractor'
 import { useDetails } from '../hooks/useDetails'
 import { useQuery } from '../hooks/useQuery'
-
-interface IVehicleDetailsState {
-  name: string
-  vehicleClass: string
-  asociated: IAsociated[]
-}
+import { IVehicleDetailsState } from '../dto/details'
 
 const Vehicle = () => {
   const {type, id} = useQuery(['type', 'id'])
   const url = getApiUrl(type, id)
   const imageSrc = getImageSrc(type, id)
 
-  const {name, vehicleClass, asociated} = useDetails(url, extractVehicleData)
+  const {name, vehicleClass, asociated} = useDetails<IVehicleDetailsState>(url, extractVehicleData)
 
   const asociatedList = asociated?.map((params: IAsociated) => {
     return <AsociatedItem key={params.name} {...params}/>

@@ -9,19 +9,14 @@ import Text from '../components/Text'
 import { extractPlanetData } from '../services/DataExtractor'
 import { useDetails } from '../hooks/useDetails'
 import { useQuery } from '../hooks/useQuery'
-
-interface IPlanetDetailsState {
-  name: string
-  population: string
-  asociated: IAsociated[]
-}
+import { IPlanetDetailsState } from '../dto/details'
 
 const Planet = () => {
   const {type, id} = useQuery(['type', 'id'])
   const url = getApiUrl(type, id)
   const imageSrc = getImageSrc(type, id)
 
-  const {name, population, asociated} = useDetails(url, extractPlanetData)
+  const {name, population, asociated} = useDetails<IPlanetDetailsState>(url, extractPlanetData)
 
   const asociatedList = asociated?.map((params: IAsociated) => {
     return <AsociatedItem key={params.name} {...params}/>
