@@ -1,9 +1,9 @@
-import { BasicInfo, ExtractAsociates, ExtractData, IData, DetailsKey } from '../dto/details'
+import { BasicInfo, DetailsKey, ExtractAsociates, ExtractData, IData } from '../dto/details'
+import { IAction, IActionPayload } from '../dto/store'
 import { useEffect, useState } from 'react'
 
 import { getIdFromUrl } from '../helpers/getIdFromUrl'
 import { getTypeFromUrl } from '../helpers/getTypeFromUrl'
-import { IAction, IActionPayload } from '../dto/store'
 
 export const useDetails = <S>(
   apiUrl: DetailsKey,
@@ -36,6 +36,9 @@ export const useDetails = <S>(
     fetch(url)
       .then((response) => response.json())
       .then(handleData(extracktAsociates))
+      .catch((error) => {
+        throw new Error(error)
+      })
   }
 
   useEffect(() => {

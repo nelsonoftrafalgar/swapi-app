@@ -1,5 +1,5 @@
+import { LIST_IMG_FALLBACK, getImageSrc, getLinkHref } from '../services/UrlBuilder'
 import { Tile, Url } from '../styles/shared'
-import { getImageSrc, getLinkHref } from '../services/UrlBuilder'
 
 import { Col } from '../grid'
 import { IListItemProps } from '../dto/list'
@@ -15,7 +15,7 @@ const Image = styled.img`
   width: 150px;
   min-height: 100px;
   margin-bottom: 10px;
-  background-image: url(${'https://via.placeholder.com/150x100.png?text=No+image'});
+  background-image: url(${LIST_IMG_FALLBACK});
 `
 
 const rwdParams = getRwdParams([

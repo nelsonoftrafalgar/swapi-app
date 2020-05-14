@@ -12,9 +12,7 @@ const Asociated: React.FC<IAsociatedProps> = ({title, data}) => {
     <>
       <Text type={'h2'} size={'20px'}>Asociated {title}</Text>
       {data?.length
-        ? <Ul>
-            {data}
-          </Ul>
+        ? <Ul>{data}</Ul>
         : <Text>unknown</Text>
       }
     </>

@@ -1,9 +1,9 @@
-import { IAction, IState, IStoreContext, IActionPayload } from '../dto/store'
-import React, { useReducer } from 'react'
+import { DetailsKey, DetailsState } from '../dto/details'
+import { IAction, IActionPayload, IState, IStoreContext } from '../dto/store'
 import { IListState, ListsKey } from '../dto/list'
-import { DetailsState, DetailsKey } from '../dto/details'
+import React, { useReducer } from 'react'
 
-const initialState: IState = {
+export const initialState: IState = {
   lists: new Map(),
   details: new Map()
 }
@@ -16,7 +16,7 @@ const detailsReducer = (state: IState, {key, value}: IActionPayload<DetailsKey, 
   return {...state, details: state.details.set(key, value)}
 }
 
-const reducer = (state: IState, {type, payload}: IAction): IState => {
+export const reducer = (state: IState, {type, payload}: IAction): IState => {
   switch (type) {
     case 'CACHE_LIST':
       return listsReducer(state, payload)

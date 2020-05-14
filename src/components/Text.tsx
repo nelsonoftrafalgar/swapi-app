@@ -8,6 +8,12 @@ interface ITextProps {
   type?: string
 }
 
+interface IStyledTextProps {
+  _color: string
+  _size: string
+  _font: string
+}
+
 const Text: React.FC<ITextProps> = ({
   children,
   type = 'p',
@@ -16,14 +22,14 @@ const Text: React.FC<ITextProps> = ({
   color = 'black'
 }) => {
 
-  const StyledText = styled(type as any)<ITextProps>`
-    ${({color}) => `color: ${color};`}
-    ${({size}) => `font-size: ${size};`}
-    ${({font}) => `font-family: ${font};`}
+  const StyledText = styled(type as any)<IStyledTextProps>`
+    ${({_color}) => `color: ${_color};`}
+    ${({_size}) => `font-size: ${_size};`}
+    ${({_font}) => `font-family: ${_font};`}
   `
 
   return (
-    <StyledText color={color} size={size} font={font}>
+    <StyledText _color={color} _size={size} _font={font}>
       {children}
     </StyledText>
   )

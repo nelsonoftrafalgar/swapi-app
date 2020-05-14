@@ -1,6 +1,7 @@
 import { Col, Row } from '../grid'
 import { Loader, Tile } from '../styles/shared'
 
+import { DETAILS_IMG_FALLBACK } from '../services/UrlBuilder'
 import React from 'react'
 import Text from '../components/Text'
 import { getRwdParams } from '../helpers/getRwdParams'
@@ -25,7 +26,7 @@ const Description = styled.div`
 const Image = styled.img`
   width: 250px;
   min-height: 150px;
-  background-image: url(${'https://via.placeholder.com/250x150.png?text=No+image'});
+  background-image: url(${DETAILS_IMG_FALLBACK});
 `
 
 export interface IDetailsProps {
