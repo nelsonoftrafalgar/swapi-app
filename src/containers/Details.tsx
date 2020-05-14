@@ -24,6 +24,8 @@ const Description = styled.div`
 
 const Image = styled.img`
   width: 250px;
+  min-height: 150px;
+  background-image: url(${'https://via.placeholder.com/250x150.png?text=No+image'});
 `
 
 export interface IDetailsProps {
@@ -42,7 +44,7 @@ const Details: React.FC<IDetailsProps> = ({isLoading, imageSrc, description, lis
       <Row>
         <Col size={12} padding={master_padding} rwdParams={rwdParams}>
           <Tile>
-            <Image src={imageSrc}/>
+            <Image src={imageSrc} alt=''/>
             <Description>
               {description}
             </Description>

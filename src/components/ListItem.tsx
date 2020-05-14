@@ -13,7 +13,9 @@ const {medium_width, large_width, master_padding} = vars
 
 const Image = styled.img`
   width: 150px;
+  min-height: 100px;
   margin-bottom: 10px;
+  background-image: url(${'https://via.placeholder.com/150x100.png?text=No+image'});
 `
 
 const rwdParams = getRwdParams([
@@ -29,7 +31,7 @@ const ListItem: React.FC<IListItemProps> = ({name, id, lastItemRef, type}) => {
     <Col size={12} padding={master_padding} rwdParams={rwdParams}>
       <Url to={href}>
         <Tile withHover={true} ref={lastItemRef}>
-          <Image src={imageSrc}/>
+          <Image src={imageSrc} alt=''/>
           <Text>{name}</Text>
         </Tile>
       </Url>

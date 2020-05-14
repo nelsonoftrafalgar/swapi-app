@@ -5,20 +5,21 @@ import AsociatedItem from '../components/AsociatedItem'
 import Details from './Details'
 import { IAsociated } from '../dto/asociated'
 import { IPersonDetailsState } from '../dto/details'
-import React from 'react'
+import React, { useContext } from 'react'
 import Text from '../components/Text'
 import { Url } from '../styles/shared'
 import { extractPersonData } from '../services/DataExtractor'
 import { useDetails } from '../hooks/useDetails'
 import { useQuery } from '../hooks/useQuery'
+import { StoreContext } from './Store'
 
 const Person = () => {
   const {type, id} = useQuery(['type', 'id'])
-
   const url = getApiUrl(type, id)
   const imageSrc = getImageSrc(type, id)
+  const {dispatch, store: {details}} = useContext(StoreContext)
 
-  const {name, asociated} = useDetails<IPersonDetailsState>(url, extractPersonData)
+  const {name, asociated} = useDetails<IPersonDetailsState>(url, extractPersonData, dispatch, details)
 
   const planet = asociated?.find((item: IAsociated) => item.type === 'planets')!
   const race = asociated?.find((item: IAsociated) => item.type === 'species')

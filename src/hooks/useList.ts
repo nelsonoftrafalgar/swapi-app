@@ -1,4 +1,4 @@
-import { IListData, IListState } from '../dto/list'
+import { IListData, IListState, ListsKey } from '../dto/list'
 import { useCallback, useEffect, useRef, useState } from 'react'
 
 import { IAction } from '../dto/store'
@@ -6,7 +6,11 @@ import { getDataItem } from '../helpers/getDataItem'
 import { getNextUrls } from '../helpers/getNextUrls'
 import { pluralFetch } from '../helpers/pluralFetch'
 
-export const useList = (paths: string[], lists: Map<string[], IListState>, dispatch: React.Dispatch<IAction>) => {
+export const useList = (
+  paths: ListsKey,
+  lists: Map<ListsKey, IListState>,
+  dispatch: React.Dispatch<IAction>
+) => {
   const [state, setState] = useState<IListState>({items: [], nexts: []})
   const observer = useRef<IntersectionObserver>()
 
@@ -17,7 +21,7 @@ export const useList = (paths: string[], lists: Map<string[], IListState>, dispa
     setState({items: [...state.items, ...dataItems], nexts})
   }
 
-  const getListItems = (urls: string[]) => {
+  const getListItems = (urls: ListsKey) => {
     pluralFetch(urls, extractListData)
   }
 

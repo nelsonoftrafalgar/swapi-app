@@ -5,18 +5,20 @@ import AsociatedItem from '../components/AsociatedItem'
 import Details from './Details'
 import { IAsociated } from '../dto/asociated'
 import { IVehicleDetailsState } from '../dto/details'
-import React from 'react'
+import React, { useContext } from 'react'
 import Text from '../components/Text'
 import { extractVehicleData } from '../services/DataExtractor'
 import { useDetails } from '../hooks/useDetails'
 import { useQuery } from '../hooks/useQuery'
+import { StoreContext } from './Store'
 
 const Vehicle = () => {
   const {type, id} = useQuery(['type', 'id'])
   const url = getApiUrl(type, id)
   const imageSrc = getImageSrc(type, id)
+  const {dispatch, store: {details}} = useContext(StoreContext)
 
-  const {name, vehicleClass, asociated} = useDetails<IVehicleDetailsState>(url, extractVehicleData)
+  const {name, vehicleClass, asociated} = useDetails<IVehicleDetailsState>(url, extractVehicleData, dispatch, details)
 
   const asociatedList = asociated?.map((params: IAsociated) => {
     return <AsociatedItem key={params.name} {...params}/>

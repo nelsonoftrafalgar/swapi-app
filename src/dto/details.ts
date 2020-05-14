@@ -60,3 +60,7 @@ export interface IVehicleDetailsState {
   vehicleClass: string
   asociated: IAsociated[]
 }
+
+export type DetailsState = IPersonDetailsState & IPlanetDetailsState & IVehicleDetailsState
+
+export type DetailsKey = string

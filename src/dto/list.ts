@@ -1,5 +1,6 @@
 export type LastItemRef = (node: HTMLDivElement) => void
 export type ListType = 'people' | 'vehicles' | 'planets'
+export type ListsKey = string[]
 
 export interface IListItem {
   id: string
@@ -16,7 +17,7 @@ export interface IListItemProps {
 }
 
 export interface IListProps {
-  paths: string[]
+  paths: ListsKey
 }
 
 export interface IListState {
